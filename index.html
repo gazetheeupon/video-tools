@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Video to GIF Converter &amp; Compressor — In-Browser, No Upload</title>
+<meta name="description" content="Convert video to GIF, or compress a video to a smaller file size, entirely in your browser. No upload, no account, no software to install.">
+<link rel="stylesheet" href="https://gazetheeupon.github.io/shared-assets/theme.css?v=2">
+<link rel="canonical" href="https://gazetheeupon.github.io/video-tools/">
+<meta property="og:title" content="Free Video to GIF Converter & Compressor">
+<meta property="og:description" content="Convert video to GIF, or compress a video to a smaller file size, entirely in your browser. No upload, no account, no software to install.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gazetheeupon.github.io/video-tools/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Free Video to GIF Converter & Compressor">
+<meta name="twitter:description" content="Convert video to GIF, or compress a video to a smaller file size, entirely in your browser. No upload, no account, no software to install.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free Video to GIF Converter & Compressor",
+  "url": "https://gazetheeupon.github.io/video-tools/",
+  "description": "Convert video to GIF, or compress a video to a smaller file size, entirely in your browser. No upload, no account, no software to install.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any (runs in web browser)",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<style>
+  :root{--bg:#0f1720;--card:#1a2532;--text:#e8edf2;--muted:#93a3b3;--accent:#4fa8ff;--border:#2a3745;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;}
+  header{padding:2rem 1rem 1rem;text-align:center;}
+  h1{font-size:1.6rem;margin:0 0 .4rem;}
+  p.sub{color:var(--muted);margin:0;max-width:640px;margin:0 auto;}
+  main{max-width:780px;margin:0 auto;padding:1.5rem 1rem 3rem;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.2rem;}
+  .tabs{display:flex;gap:.5rem;margin-bottom:1rem;}
+  .tab{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:.5rem 1rem;cursor:pointer;font-size:.9rem;}
+  .tab.active{background:var(--accent);color:#04121f;border-color:var(--accent);font-weight:600;}
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .dropzone{border:2px dashed var(--border);border-radius:10px;padding:2.2rem 1rem;text-align:center;cursor:pointer;transition:border-color .15s;}
+  .dropzone.drag{border-color:var(--accent);}
+  .dropzone input{display:none;}
+  .dropzone .hint{color:var(--muted);font-size:.9rem;margin-top:.4rem;}
+  .fname{font-size:.9rem;color:var(--text);margin-top:.6rem;word-break:break-all;}
+  label.opt{display:block;font-size:.85rem;color:var(--muted);margin:.9rem 0 .3rem;}
+  select,input[type=range]{width:100%;}
+  button.go{background:var(--accent);color:#04121f;border:none;border-radius:8px;padding:.7rem 1.4rem;font-size:1rem;font-weight:600;cursor:pointer;margin-top:1rem;}
+  button.go:disabled{opacity:.5;cursor:not-allowed;}
+  #status{color:var(--muted);font-size:.9rem;margin-top:.8rem;min-height:1.2em;white-space:pre-line;}
+  #progressWrap{background:#0d151d;border:1px solid var(--border);border-radius:8px;height:8px;overflow:hidden;margin-top:.6rem;display:none;}
+  #progressBar{background:var(--accent);height:100%;width:0%;transition:width .2s;}
+  a.dl{display:inline-block;margin-top:1rem;background:transparent;border:1px solid var(--accent);color:var(--accent);border-radius:8px;padding:.6rem 1.2rem;text-decoration:none;font-weight:600;font-size:.9rem;}
+  footer{text-align:center;color:var(--muted);font-size:.82rem;padding:1.5rem 1rem 2.5rem;}
+  footer a{color:var(--accent);}
+  .privacy{font-size:.85rem;color:var(--muted);}
+  .privacy strong{color:var(--text);}
+</style>
+</head>
+<body>
+<div class="site-header"><a class="site-header__brand" href="https://gazetheeupon.github.io/">RunLocal</a><span class="site-header__tagline">Free tools that run entirely in your browser</span></div>
+<header>
+  <h1>Free Video to GIF Converter &amp; Compressor</h1>
+  <p class="sub">Turn a video clip into a GIF, or shrink a video's file size, entirely in your browser. Nothing is uploaded &mdash; your video never leaves your device.</p>
+</header>
+<main>
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" data-tab="gif">Video &rarr; GIF</button>
+      <button class="tab" data-tab="compress">Compress video</button>
+    </div>
+
+    <div class="panel active" id="panel-gif">
+      <div class="dropzone" id="dropzone-gif">
+        <div>Drop a video here, or click to choose a file</div>
+        <div class="hint">MP4, WebM, MOV, and most common formats</div>
+        <input type="file" id="fileInput-gif" accept="video/*">
+      </div>
+      <div class="fname" id="fname-gif"></div>
+      <label class="opt">GIF width (height auto-scales)</label>
+      <select id="gifWidth">
+        <option value="320">320px (smaller file)</option>
+        <option value="480" selected>480px</option>
+        <option value="640">640px (larger file)</option>
+      </select>
+      <label class="opt">Frame rate</label>
+      <select id="gifFps">
+        <option value="8">8 fps (smaller file)</option>
+        <option value="12" selected>12 fps</option>
+        <option value="15">15 fps</option>
+      </select>
+      <button class="go" id="goBtn-gif" disabled>Convert to GIF</button>
+      <div id="progressWrap-gif" style="background:#0d151d;border:1px solid #2a3745;border-radius:8px;height:8px;overflow:hidden;margin-top:.6rem;display:none;"><div id="progressBar-gif" style="background:#4fa8ff;height:100%;width:0%;"></div></div>
+      <div id="status-gif"></div>
+      <div id="result-gif"></div>
+    </div>
+
+    <div class="panel" id="panel-compress">
+      <div class="dropzone" id="dropzone-compress">
+        <div>Drop a video here, or click to choose a file</div>
+        <div class="hint">MP4, WebM, MOV, and most common formats</div>
+        <input type="file" id="fileInput-compress" accept="video/*">
+      </div>
+      <div class="fname" id="fname-compress"></div>
+      <label class="opt">Target quality</label>
+      <select id="crf">
+        <option value="28">Smaller file, lower quality</option>
+        <option value="24" selected>Balanced</option>
+        <option value="20">Higher quality, larger file</option>
+      </select>
+      <button class="go" id="goBtn-compress" disabled>Compress video</button>
+      <div id="progressWrap-compress" style="background:#0d151d;border:1px solid #2a3745;border-radius:8px;height:8px;overflow:hidden;margin-top:.6rem;display:none;"><div id="progressBar-compress" style="background:#4fa8ff;height:100%;width:0%;"></div></div>
+      <div id="status-compress"></div>
+      <div id="result-compress"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="privacy"><strong>How this works:</strong> this page loads FFmpeg, compiled to WebAssembly, and runs it in your browser tab. Your video file is read locally and is never sent to any server. The page may refresh itself once on your first visit &mdash; that's a background step that lets your browser run FFmpeg safely, and it only happens once. The first conversion also loads a one-time ~25&nbsp;MB engine file from a public CDN; after that it's cached by your browser.</p>
+  </div>
+
+  <div id="ad-slot"></div>
+</main>
+<footer>
+  Free, ad-supported, no signup. Built with <a href="https://github.com/ffmpegwasm/ffmpeg.wasm" target="_blank" rel="noopener">ffmpeg.wasm</a> (MIT).
+<div style="margin-top:.6rem;">&copy; 2026 GazeTheeUpon. All rights reserved. <a href="LICENSE" style="color:inherit;">Source license</a> &mdash; view-source friendly, redistribution not permitted.</div>
+</footer>
+<script src="coi-serviceworker.js"></script>
+<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
