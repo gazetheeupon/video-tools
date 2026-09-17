@@ -124,6 +124,24 @@
     <p class="privacy"><strong>How this works:</strong> this page loads FFmpeg, compiled to WebAssembly, and runs it in your browser tab. Your video file is read locally and is never sent to any server. The page may refresh itself once on your first visit &mdash; that's a background step that lets your browser run FFmpeg safely, and it only happens once. The first conversion also loads a one-time ~25&nbsp;MB engine file from a public CDN; after that it's cached by your browser.</p>
   </div>
 
+
+  <div class="card faq">
+    <h2>Troubleshooting</h2>
+    <details><summary>Conversion is much slower than a desktop video app</summary>
+      <p>This page runs the real FFmpeg project compiled to WebAssembly, mostly single-threaded in the browser, so it's noticeably slower than native FFmpeg on your desktop. That's fine for a short clip; a long video will take real time to process.</p>
+    </details>
+    <details><summary>The browser tab crashes or runs out of memory</summary>
+      <p>Everything happens in your browser tab's own memory, with no server to fall back on for a very large file. Try a shorter clip, a lower resolution, or a lower frame rate first, especially on a phone or an older computer.</p>
+    </details>
+  </div>
+
+  <div class="card cli">
+    <h2>Prefer the command line?</h2>
+    <div class="cli-block">ffmpeg -i input.mp4 -vf "fps=12,scale=480:-1" output.gif   # to GIF
+ffmpeg -i input.mp4 -crf 28 output.mp4                       # compress</div>
+  </div>
+
+
   <div id="ad-slot" data-aads-unit="2455564"></div>
 </main>
 <script src="coi-serviceworker.js"></script>
