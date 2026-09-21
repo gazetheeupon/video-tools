@@ -62,6 +62,30 @@
   .privacy{font-size:.85rem;color:var(--muted);}
   .privacy strong{color:var(--text);}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Conversion is much slower than a desktop video app",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This page runs the real FFmpeg project compiled to WebAssembly, mostly single-threaded in the browser, so it's noticeably slower than native FFmpeg on your desktop. That's fine for a short clip; a long video will take real time to process."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The browser tab crashes or runs out of memory",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Everything happens in your browser tab's own memory, with no server to fall back on for a very large file. Try a shorter clip, a lower resolution, or a lower frame rate first, especially on a phone or an older computer."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <header>
